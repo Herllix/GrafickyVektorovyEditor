@@ -36,6 +36,15 @@ public class drwPanel extends JPanel {
         repaint();
     }
 
+    public AbstractGraphObject obsahuje(int x, int y){
+        for (AbstractGraphObject objekt : objekty) {
+            if (objekt.obsahuje(x, y)) {
+                return objekt;
+            }
+        }
+        return null;
+    }
+
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;

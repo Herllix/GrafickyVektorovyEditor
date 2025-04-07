@@ -20,6 +20,14 @@ public abstract class AbstractGraphObject {
         this.pozice = pozice;
     }
 
+    public int getX(){
+        return pozice.x;
+    }
+
+    public int getY(){
+        return pozice.y;
+    }
+
     public Color getBarva() {
         return barva;
     }
