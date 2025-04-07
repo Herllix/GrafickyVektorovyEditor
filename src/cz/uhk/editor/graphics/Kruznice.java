@@ -21,7 +21,7 @@ public class Kruznice extends AbstractGraphObject{
     @Override
     public void draw(Graphics2D g) {
         g.setColor(barva);
-        g.fillOval(pozice.x - polomer, pozice.y -polomer, polomer*2, polomer*2);
+        g.fillOval(pozice.x , pozice.y , polomer*2, polomer*2);
     }
 
     @Override

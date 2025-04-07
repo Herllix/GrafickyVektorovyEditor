@@ -16,6 +16,26 @@ public class drwPanel extends JPanel {
         objekty.add(new Obdelnik(new Point (824, 400), Color.RED, 60,80));
     }
 
+    public void addKruznice(Kruznice kruznice) {
+        objekty.add(kruznice);
+        repaint();
+    }
+
+    public void addCtverec(Ctverec ctverec) {
+        objekty.add(ctverec);
+        repaint();
+    }
+
+    public void addObdelnik(Obdelnik obdelnik) {
+        objekty.add(obdelnik);
+        repaint();
+    }
+
+    public void addTrojuhelnik(Trojuhelnik trojuhelnik) {
+        objekty.add(trojuhelnik);
+        repaint();
+    }
+
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
