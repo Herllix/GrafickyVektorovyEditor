@@ -26,7 +26,12 @@ public class Kruznice extends AbstractGraphObject{
 
     @Override
     public boolean obsahuje(int x, int y) {
-        double vzdalenost = Math.sqrt(Math.pow(x - pozice.x, 2) + Math.pow(y - pozice.y, 2));
-        return vzdalenost <= polomer;
+        int m = pozice.x + polomer;
+        int n = pozice.y + polomer;
+
+        int l =(x - m) * (x-m)+(y - m) * (y-m);
+        int r = polomer * polomer;
+
+        return l <=r;
     }
 }

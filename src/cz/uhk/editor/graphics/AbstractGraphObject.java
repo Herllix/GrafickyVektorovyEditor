@@ -2,9 +2,7 @@ package cz.uhk.editor.graphics;
 import java.awt.*;
 
 public abstract class AbstractGraphObject {
-
     protected Point pozice;
-
     protected Color barva;
 
     public AbstractGraphObject(Point pozice, Color barva) {

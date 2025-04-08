@@ -10,14 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GrafickyEditorFrame extends JFrame {
+    private List<AbstractGraphObject> objekty = new ArrayList<>();
     private JToolBar toolBar;
     private JToggleButton btCtverec;
     private JToggleButton btObdelnik;
     private JToggleButton btTrojuhelnik;
     private JToggleButton btKruznice;
     private JToggleButton btSipka;
+    private drwPanel panel;
     private AbstractGraphObject vybranyObjekt;
-    private int poziceX, poziceY;
 
     public GrafickyEditorFrame() {
         setTitle("Graficky Editor");
@@ -27,27 +28,39 @@ public class GrafickyEditorFrame extends JFrame {
 
         createToolbar();
 
-        drwPanel panel = new drwPanel();
-        panel.initTestData();
+        initTestData();
 
+        panel = new drwPanel(objekty);
         add(panel, BorderLayout.CENTER);
-        MouseAdapter xd = new MouseAdapter() {public void mouseClicked(MouseEvent e) {
+        MouseAdapter adaMouse = new MouseAdapter() {public void mouseClicked(MouseEvent e) {
             if (e.getButton() == MouseEvent.BUTTON1) {
                 if (btKruznice.isSelected()) {
-                    panel.addKruznice(new Kruznice(new Point(e.getX(), e.getY()), Color.GREEN, 40));
+                    System.out.println("ANO");
+                    objekty.add(new Kruznice(new Point(e.getX(), e.getY()), Color.GREEN, 40));
+                    repaint();
                 } else if (btCtverec.isSelected()) {
-                    panel.addCtverec(new Ctverec(new Point(e.getX(), e.getY()), Color.BLUE, 40));
+                    objekty.add(new Ctverec(new Point(e.getX(), e.getY()), Color.BLUE, 40));
+                    repaint();
                 } else if (btObdelnik.isSelected()) {
-                    panel.addObdelnik(new Obdelnik(new Point(e.getX(), e.getY()), Color.RED, 20, 40));
+                    objekty.add(new Obdelnik(new Point(e.getX(), e.getY()), Color.RED, 20, 40));
+                    repaint();
                 } else if (btTrojuhelnik.isSelected()) {
-                    panel.addTrojuhelnik(new Trojuhelnik(new Point(e.getX(), e.getY()), Color.GREEN, 40));
+                    objekty.add(new Trojuhelnik(new Point(e.getX(), e.getY()), Color.GREEN, 40));
+                    repaint();
                 }
             }
         }
             public void mousePressed(MouseEvent e) {
                 if(e.getButton() == MouseEvent.BUTTON1) {
                     if(btSipka.isSelected()) {
-                        vybranyObjekt = panel.obsahuje(e.getX(), e.getY());
+                        vybranyObjekt = null;
+                        for(int i = objekty.size() - 1; i >= 0; i--) {
+                            AbstractGraphObject obj = objekty.get(i);
+                            if (obj.obsahuje(e.getX(), e.getY())) {
+                                vybranyObjekt = obj;
+                                break;
+                            }
+                        }
                     }
                 }
             }
@@ -60,9 +73,8 @@ public class GrafickyEditorFrame extends JFrame {
                 }
             }
         };
-        panel.addMouseMotionListener(xd);
-        panel.addMouseListener(xd);
-
+        panel.addMouseMotionListener(adaMouse);
+        panel.addMouseListener(adaMouse);
     }
 
     private void createToolbar() {
@@ -85,7 +97,12 @@ public class GrafickyEditorFrame extends JFrame {
         gr.add(btKruznice);
         gr.add(btSipka);
     }
-
+    private void initTestData(){
+        objekty.add(new Trojuhelnik(new Point(206, 400), Color.GREEN, 80));
+        objekty.add(new Kruznice(new Point(412, 400), Color.BLUE, 40));
+        objekty.add(new Ctverec(new Point(618, 400), Color.PINK, 80));
+        objekty.add(new Obdelnik(new Point (824, 400), Color.RED, 60,80));
+    }
     public static void main(String[] args) {
         new GrafickyEditorFrame().setVisible(true);
     }
