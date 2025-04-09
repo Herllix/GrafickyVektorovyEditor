@@ -29,7 +29,7 @@ public class Kruznice extends AbstractGraphObject{
         int m = pozice.x + polomer;
         int n = pozice.y + polomer;
 
-        int l =(x - m) * (x-m)+(y - m) * (y-m);
+        int l =(x - m) * (x-m)+(y - n) * (y-n);
         int r = polomer * polomer;
 
         return l <=r;

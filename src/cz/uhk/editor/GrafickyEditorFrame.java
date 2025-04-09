@@ -17,6 +17,7 @@ public class GrafickyEditorFrame extends JFrame {
     private JToggleButton btTrojuhelnik;
     private JToggleButton btKruznice;
     private JToggleButton btSipka;
+    private JToggleButton btOdstranit;
     private drwPanel panel;
     private AbstractGraphObject vybranyObjekt;
 
@@ -62,6 +63,18 @@ public class GrafickyEditorFrame extends JFrame {
                             }
                         }
                     }
+                    if(btOdstranit.isSelected()) {
+                        vybranyObjekt = null;
+                        for(int i = objekty.size() - 1; i >= 0; i--) {
+                            AbstractGraphObject obj = objekty.get(i);
+                            if (obj.obsahuje(e.getX(), e.getY())) {
+                                vybranyObjekt = obj;
+                                objekty.remove(vybranyObjekt);
+                                repaint();
+                                break;
+                            }
+                        }
+                    }
                 }
             }
 
@@ -85,17 +98,20 @@ public class GrafickyEditorFrame extends JFrame {
         btTrojuhelnik = new JToggleButton("Trojuhlenik");
         btKruznice = new JToggleButton("Kruznice");
         btSipka = new JToggleButton("Sipka");
+        btOdstranit = new JToggleButton("Odstranit");
         toolBar.add(btCtverec);
         toolBar.add(btObdelnik);
         toolBar.add(btTrojuhelnik);
         toolBar.add(btKruznice);
         toolBar.add(btSipka);
+        toolBar.add(btOdstranit);
         ButtonGroup gr = new ButtonGroup();
         gr.add(btCtverec);
         gr.add(btObdelnik);
         gr.add(btTrojuhelnik);
         gr.add(btKruznice);
         gr.add(btSipka);
+        gr.add(btOdstranit);
     }
     private void initTestData(){
         objekty.add(new Trojuhelnik(new Point(206, 400), Color.GREEN, 80));

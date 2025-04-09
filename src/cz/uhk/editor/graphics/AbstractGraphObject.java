@@ -17,23 +17,12 @@ public abstract class AbstractGraphObject {
     public void setPozice(Point pozice) {
         this.pozice = pozice;
     }
-
-    public int getX(){
-        return pozice.x;
-    }
-
-    public int getY(){
-        return pozice.y;
-    }
-
     public Color getBarva() {
         return barva;
     }
-
     public void setBarva(Color barva) {
         this.barva = barva;
     }
-
     public abstract void draw(Graphics2D g);
     public abstract boolean obsahuje(int x, int y);
 }
