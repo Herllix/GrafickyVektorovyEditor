@@ -36,7 +36,6 @@ public class GrafickyEditorFrame extends JFrame {
         MouseAdapter adaMouse = new MouseAdapter() {public void mouseClicked(MouseEvent e) {
             if (e.getButton() == MouseEvent.BUTTON1) {
                 if (btKruznice.isSelected()) {
-                    System.out.println("ANO");
                     objekty.add(new Kruznice(new Point(e.getX(), e.getY()), Color.GREEN, 40));
                     repaint();
                 } else if (btCtverec.isSelected()) {
@@ -56,9 +55,8 @@ public class GrafickyEditorFrame extends JFrame {
                     if(btSipka.isSelected()) {
                         vybranyObjekt = null;
                         for(int i = objekty.size() - 1; i >= 0; i--) {
-                            AbstractGraphObject obj = objekty.get(i);
-                            if (obj.obsahuje(e.getX(), e.getY())) {
-                                vybranyObjekt = obj;
+                            if (objekty.get(i).obsahuje(e.getX(), e.getY())) {  
+                                vybranyObjekt = objekty.get(i);
                                 break;
                             }
                         }

@@ -20,9 +20,11 @@ public class Trojuhelnik extends AbstractGraphObject {
 
     @Override
     public void draw(Graphics2D g) {
+        double vyskaDouble = (Math.sqrt(3.0) / 2.0) * strana;
+        int vyska = (int) vyskaDouble;
         g.setColor(barva);
-        int[] xPoints = {pozice.x, pozice.x+strana, pozice.x+strana / 2};
-        int[] yPoints = {pozice.y + strana, pozice.y + strana, (int) (pozice.y + strana - (Math.sqrt(3) / 2) * strana)};
+        int[] xPoints = {pozice.x - strana /2, pozice.x, pozice.x+strana /2};
+        int[] yPoints = {pozice.y + vyska, pozice.y, pozice.y + vyska};
         g.fillPolygon(xPoints, yPoints, 3);
     }
 
